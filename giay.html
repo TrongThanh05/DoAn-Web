@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Giày</title>
+    <link rel="stylesheet" href="../css/basic.css" />
+    <link rel="stylesheet" href="../css/sanpham.css" />
+    <link rel="stylesheet" href="../css/header.css" />
+    <link rel="stylesheet" href="../css/footer.css" />
+    <!-- reset css -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+    />
+    <!-- get icon with cdn -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header class="header">
+      <!-- menu khi màn hình thu nhỏ tới 1 mức nhất định có @media ở dưới cùng  -->
+      <ul class="header__menuMobile" id="header__menuMobile">
+        <div class="header__menuMobile-title">
+          <p>🛒 Menu</p>
+          <i id="exitMenu" class="fa-solid fa-xmark"></i>
+        </div>
+        <li><a href="../html/trangchu.html">Trang chủ</a></li>
+        <li class="header__menu-dropdown">
+          <a href="../html/sanpham.html">Sản Phẩm</a>
+          <div class="dropdown-list">
+            <a href="../html/ao.html">Áo</a>
+            <a href="../html/quan.html">Quần</a>
+            <a href="../html/giay.html">Giày</a>
+          </div>
+        </li>
+        <li><a href="../html/gioithieu.html">Giới Thiệu</a></li>
+        <li><a href="../html/lienhe.html">Liên Hệ</a></li>
+      </ul>
+      <nav>
+        <div class="header__bar">
+          <i id="barIcon" class="fa-solid fa-bars"></i>
+        </div>
+        <!-- logo -->
+        <a href="../html/trangchu.html" class="header__logo">
+          <img src="../img/logo_shop.png" alt="Logo" />
+        </a>
+        <!-- Menu -->
+        <ul class="header__menu">
+          <li><a href="../html/trangchu.html">Trang chủ</a></li>
+          <li class="header__menu-dropdown">
+            <a href="../html/sanpham.html">Sản Phẩm</a>
+            <div class="dropdown-list">
+              <a href="../html/ao.html">Áo</a>
+              <a href="../html/quan.html">Quần</a>
+              <a href="../html/giay.html">Giày</a>
+            </div>
+          </li>
+          <li><a href="../html/gioithieu.html">Giới Thiệu</a></li>
+          <li><a href="../html/lienhe.html">Liên Hệ</a></li>
+        </ul>
+        <div class="header__icon">
+          <div class="header__icon--noti">
+            <i class="notiIcon fa-solid fa-bell"></i>
+            <span id="noti-badge" class="noti-badge">0</span>
+            <div class="header__icon--notiList">
+              <div class="notificationTitle">
+                <h4>Thông báo mới nhận</h4>
+                <button id="deleteAllNoti">Xóa hết thông báo</button>
+              </div>
+              <div class="allNotification"></div>
+              <button id="showAllNotice">Xem tất cả</button>
+            </div>
+          </div>
+          <!-- Giỏ hàng -->
+          <div class="header__icon--cart">
+            <a href="../html/giohang.html">
+              <i class="fas fa-shopping-cart"></i>
+            </a>
+            <span id="cart-badge" class="cart-badge">0</span>
+          </div>
+          <!-- sản phẩm đã thích -->
+          <div class="header__icon--heart">
+            <a href="../html/sanpham_yeuthich.html"
+              ><i class="fa-solid fa-heart"></i
+            ></a>
+            <span id="heart-badge" class="heart-badge">0</span>
+          </div>
+          <!-- Người dùng -->
+          <div class="header__icon--user">
+            <i class="fas fa-user"></i>
+            <div class="user-dropdown">
+              <a href="../html/dangnhap_dangky.html?type=login">Đăng nhập</a>
+              <a href="../html/dangnhap_dangky.html?type=register">Đăng ký</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div class="header__under">
+        <a href="../html/trangchu.html">Trang chủ</a>
+        / Giày
+      </div>
+    </header>
+    <div class="underHeader-img">
+      <a href="#">
+        <img
+          src="https://theme.hstatic.net/200000881795/1001243022/14/collection_main_banner.jpg?v=152"
+          alt="Giảm giá"
+        />
+      </a>
+    </div>
+    <div class="main">
+      <div class="main__arrange">
+        <h3>Quần</h3>
+        <div class="arrangeProducts">
+          <label for="arranger">Sắp xếp: </label>
+          <select name="arranger" id="arrange">
+            <option id="options" value="all">Tất cả</option>
+            <option id="options" value="a-z">Tên từ A &rarr; Z</option>
+            <option id="options" value="z-a">Tên từ Z &rarr; A</option>
+            <option id="options" value="ascending">Giá tăng dần</option>
+            <option id="options" value="decreasing">Giá giảm dần</option>
+          </select>
+        </div>
+      </div>
+      <div class="main__products">
+        <div class="main__productsSelect">
+          <div class="main__productsSelect--size">
+            <p>KÍCH THƯỚC</p>
+            <div>
+              <input type="checkbox" name="sizeS" id="size" value="sizeS" />
+              <label for="sizeS">Size S</label>
+            </div>
+            <div>
+              <input type="checkbox" name="sizeM" id="size" value="sizeM" />
+              <label for="sizeM">Size M</label>
+            </div>
+            <div>
+              <input type="checkbox" name="sizeL" id="size" value="sizeL" />
+              <label for="sizeL">Size L</label><br />
+            </div>
+            <div>
+              <input type="checkbox" name="sizeXL" id="size" value="sizeXL" />
+              <label for="sizeXL">Size XL</label><br />
+            </div>
+          </div>
+          <div class="main__productsSelect--price">
+            <p>MỨC GIÁ</p>
+            <div>
+              <input type="checkbox" value="under100" class="price" />
+              <label for="under100">Giá dưới 100.000đ</label><br />
+            </div>
+            <div>
+              <input type="checkbox" value="100-200" class="price" />
+              <label for="100-200">100.0000đ - 200.000đ</label><br />
+            </div>
+            <di>
+              <input type="checkbox" value="200-300" class="price" />
+              <label for="200-300">200.0000đ - 300.000đ</label><br />
+            </di>
+            <div>
+              <input type="checkbox" value="300-500" class="price" />
+              <label for="300-500">300.0000đ - 500.000đ</label><br />
+            </div>
+            <div>
+              <input type="checkbox" value="over500" class="price" />
+              <label for="over500">Giá trên 500.0000đ</label><br />
+            </div>
+          </div>
+        </div>
+        <div class="main__productsList">
+          <div class="main__productsList-all">
+            <div class="main__productsList-item" data-price="750000">
+              <div class="product__img">
+                <a
+                  href="../html/giay_nike_air_jordan_1_retro_high_og.html"
+                  class="product__imgLink"
+                >
+                  <img
+                    src="../img/giay_air_jordan_1_Retro_High_OG/giay_air_jordan_red.png"
+                    alt="Giày Air Jordan 1 Retro High OG"
+                  />
+                </a>
+                <button class="product__img-addCartBadge">
+                  <i class="fas fa-shopping-cart"></i>
+                </button>
+              </div>
+              <div class="product__info">
+                <div class="product__info-top">
+                  <h5>4Bros</h5>
+                  <div class="product__info-loveIcon">
+                    <i class="loveIcon__icon fa-regular fa-heart"></i>
+                    <span class="loveIcon__text">Yêu thích</span>
+                  </div>
+                </div>
+                <a
+                  href="../html/giay_nike_air_jordan_1_retro_high_og.html"
+                  id="productName"
+                  >Giày Air Jordan 1 Retro High OG</a
+                >
+                <p>750,000đ</p>
+              </div>
+              <a
+                href="../html/giay_nike_air_jordan_1_retro_high_og.html"
+                class="product__buyNow"
+                >Mua ngay</a
+              >
+            </div>
+            <div class="main__productsList-item" data-price="405999">
+              <div class="product__img">
+                <a
+                  href="../html/giay_nike_air_jordan_1_retro_high_og.html"
+                  class="product__imgLink"
+                >
+                  <img
+                    src="../img/giay_adidas_adiform_superstar.png"
+                    alt="Giày Adidas Adiform Superstar"
+                  />
+                </a>
+                <button class="product__img-addCartBadge">
+                  <i class="fas fa-shopping-cart"></i>
+                </button>
+              </div>
+              <div class="product__info">
+                <div class="product__info-top">
+                  <h5>4Bros</h5>
+                  <div class="product__info-loveIcon">
+                    <i class="loveIcon__icon fa-regular fa-heart"></i>
+                    <span class="loveIcon__text">Yêu thích</span>
+                  </div>
+                </div>
+                <a
+                  href="../html/giay_nike_air_jordan_1_retro_high_og.html"
+                  id="productName"
+                  >Giày thể thao Adidas AdiForm Superstar</a
+                >
+                <p>405,999đ</p>
+              </div>
+              <a
+                href="../html/giay_nike_air_jordan_1_retro_high_og.html"
+                class="product__buyNow"
+                >Mua ngay</a
+              >
+            </div>
+
+            <div class="main__productsList-item" data-price="649999">
+              <div class="product__img">
+                <a
+                  href="../html/giay_nike_air_jordan_1_retro_high_og.html"
+                  class="product__imgLink"
+                >
+                  <img
+                    src="../img/giay_chelsea_boot_nam_da_bo.png"
+                    alt="Giày Giày Chelsea Boot"
+                  />
+                </a>
+                <button class="product__img-addCartBadge">
+                  <i class="fas fa-shopping-cart"></i>
+                </button>
+              </div>
+              <div class="product__info">
+                <div class="product__info-top">
+                  <h5>4Bros</h5>
+                  <div class="product__info-loveIcon">
+                    <i class="loveIcon__icon fa-regular fa-heart"></i>
+                    <span class="loveIcon__text">Yêu thích</span>
+                  </div>
+                </div>
+                <a
+                  href="../html/giay_nike_air_jordan_1_retro_high_og.html"
+                  id="productName"
+                  >Giày Chelsea Boot nam da bò</a
+                >
+                <p>649,999đ</p>
+              </div>
+              <a
+                href="../html/giay_nike_air_jordan_1_retro_high_og.html"
+                class="product__buyNow"
+                >Mua ngay</a
+              >
+            </div>
+            <div class="main__productsList-item" data-price="479999">
+              <div class="product__img">
+                <a
+                  href="../html/giay_nike_air_jordan_1_retro_high_og.html"
+                  class="product__imgLink"
+                >
+                  <img
+                    src="../img/giay_converse_Chuck_Taylor_Christmas.png"
+                    alt="Giày Converse cao cổ"
+                  />
+                </a>
+                <button class="product__img-addCartBadge">
+                  <i class="fas fa-shopping-cart"></i>
+                </button>
+              </div>
+              <div class="product__info">
+                <div class="product__info-top">
+                  <h5>4Bros</h5>
+                  <div class="product__info-loveIcon">
+                    <i class="loveIcon__icon fa-regular fa-heart"></i>
+                    <span class="loveIcon__text">Yêu thích</span>
+                  </div>
+                </div>
+                <a
+                  href="../html/giay_nike_air_jordan_1_retro_high_og.html"
+                  id="productName"
+                  >Giày converse Chuck Taylor Christmas</a
+                >
+                <p>479,999đ</p>
+              </div>
+              <a
+                href="../html/giay_nike_air_jordan_1_retro_high_og.html"
+                class="product__buyNow"
+                >Mua ngay</a
+              >
+            </div>
+            <div class="main__productsList-item" data-price="720000">
+              <div class="product__img">
+                <a
+                  href="../html/giay_nike_air_jordan_1_retro_high_og.html"
+                  class="product__imgLink"
+                >
+                  <img
+                    src="../img/giay_jordan_4_Military.png"
+                    alt="Giày Jordan 4 Military"
+                  />
+                </a>
+                <button class="product__img-addCartBadge">
+                  <i class="fas fa-shopping-cart"></i>
+                </button>
+              </div>
+              <div class="product__info">
+                <div class="product__info-top">
+                  <h5>4Bros</h5>
+                  <div class="product__info-loveIcon">
+                    <i class="loveIcon__icon fa-regular fa-heart"></i>
+                    <span class="loveIcon__text">Yêu thích</span>
+                  </div>
+                </div>
+                <a
+                  href="../html/giay_nike_air_jordan_1_retro_high_og.html"
+                  id="productName"
+                  >Giày thể thao Jordan 4 Military</a
+                >
+                <p>720,000đ</p>
+              </div>
+              <a
+                href="../html/giay_nike_air_jordan_1_retro_high_og.html"
+                class="product__buyNow"
+                >Mua ngay</a
+              >
+            </div>
+            <div class="main__productsList-item" data-price="339000">
+              <div class="product__img">
+                <a
+                  href="../html/giay_nike_air_jordan_1_retro_high_og.html"
+                  class="product__imgLink"
+                >
+                  <img
+                    src="../img/giay_new_balance_574.png"
+                    alt="Giày New Balance 574"
+                  />
+                </a>
+                <button class="product__img-addCartBadge">
+                  <i class="fas fa-shopping-cart"></i>
+                </button>
+              </div>
+              <div class="product__info">
+                <div class="product__info-top">
+                  <h5>4Bros</h5>
+                  <div class="product__info-loveIcon">
+                    <i class="loveIcon__icon fa-regular fa-heart"></i>
+                    <span class="loveIcon__text">Yêu thích</span>
+                  </div>
+                </div>
+                <a
+                  href="../html/giay_nike_air_jordan_1_retro_high_og.html"
+                  id="productName"
+                  >Giày thể thao New Balance 574 Classic</a
+                >
+                <p>339,000đ</p>
+              </div>
+              <a
+                href="../html/giay_nike_air_jordan_1_retro_high_og.html"
+                class="product__buyNow"
+                >Mua ngay</a
+              >
+            </div>
+            <div class="main__productsList-item" data-price="269999">
+              <div class="product__img">
+                <a
+                  href="../html/giay_nike_air_jordan_1_retro_high_og.html"
+                  class="product__imgLink"
+                >
+                  <img
+                    src="../img/giay_samba_OG_3_soc.png"
+                    alt="Giày Samba OG"
+                  />
+                </a>
+                <button class="product__img-addCartBadge">
+                  <i class="fas fa-shopping-cart"></i>
+                </button>
+              </div>
+              <div class="product__info">
+                <div class="product__info-top">
+                  <h5>4Bros</h5>
+                  <div class="product__info-loveIcon">
+                    <i class="loveIcon__icon fa-regular fa-heart"></i>
+                    <span class="loveIcon__text">Yêu thích</span>
+                  </div>
+                </div>
+                <a
+                  href="../html/giay_nike_air_jordan_1_retro_high_og.html"
+                  id="productName"
+                  >Giày thể thao Samba OG vải da lộn, đế gum cao su</a
+                >
+                <p>269,999đ</p>
+              </div>
+              <a
+                href="../html/giay_nike_air_jordan_1_retro_high_og.html"
+                class="product__buyNow"
+                >Mua ngay</a
+              >
+            </div>
+            <div class="main__productsList-item" data-price="415000">
+              <div class="product__img">
+                <a
+                  href="../html/giay_nike_air_jordan_1_retro_high_og.html"
+                  class="product__imgLink"
+                >
+                  <img
+                    src="../img/giay_sneaker_blazer_mid_77_co_cao.png"
+                    alt="Giày Sneaker Blazer Mid"
+                  />
+                </a>
+                <button class="product__img-addCartBadge">
+                  <i class="fas fa-shopping-cart"></i>
+                </button>
+              </div>
+              <div class="product__info">
+                <div class="product__info-top">
+                  <h5>4Bros</h5>
+                  <div class="product__info-loveIcon">
+                    <i class="loveIcon__icon fa-regular fa-heart"></i>
+                    <span class="loveIcon__text">Yêu thích</span>
+                  </div>
+                </div>
+                <a
+                  href="../html/giay_nike_air_jordan_1_retro_high_og.html"
+                  id="productName"
+                  >Giày Sneaker Blazer Mid 77 cổ cao</a
+                >
+                <p>415,000đ</p>
+              </div>
+              <a
+                href="../html/giay_nike_air_jordan_1_retro_high_og.html"
+                class="product__buyNow"
+                >Mua ngay</a
+              >
+            </div>
+          </div>
+          <div class="main__productsList-pageChange">
+            <button class="main__productsList-pageChange--frontPage">
+              <i class="fa-solid fa-angle-left"></i>
+            </button>
+            <div class="pageChange__pages">
+              <button>1</button>
+              <button>2</button>
+            </div>
+            <button class="main__productsList-pageChange--backPage">
+              <i class="fa-solid fa-angle-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="footer">
+      <div class="footer__contact">
+        <div class="footer__contact-item">
+          <div class="footer__contact-address">
+            <i class="fa-solid fa-map"></i>Địa chỉ : Trường Đại học Vinh, Thành
+            phố Vinh, Nghệ An
+          </div>
+          <div class="footer__contact-phone">
+            <i class="fa-solid fa-phone"></i>Số điện thoại : 0123456789
+          </div>
+          <div class="footer__contact-email">
+            <i class="fa-solid fa-envelope"></i>
+            Email :
+            <a href="mailto:4bros@gmail.com">4bros@gmail.com</a>
+          </div>
+        </div>
+        <div class="footer__contact-item">
+          <h3>CHÍNH SÁCH</h3>
+          <ul class="footer__contact-policy">
+            <li><a href="../html/trangchu.html">Trang chủ</a></li>
+            <li><a href="../html/sanpham.html">Sản phẩm</a></li>
+            <li><a href="../html/gioithieu.html">Giới Thiệu</a></li>
+            <li><a href="../html/lienhe.html">Liên Hệ</a></li>
+            <li><a href="../html/giohang.html">Giỏ hàng</a></li>
+          </ul>
+        </div>
+        <div class="footer__contact-item">
+          <h3>ĐĂNG KÝ NHẬN TIN</h3>
+          <div class="footer__contact-regis">
+            <input type="text" id="" placeholder="Nhập địa chỉ email" />
+            <button class="footer__contact-regis-btn">Đăng ký</button>
+          </div>
+          <div class="footer__contact-icon">
+            <a href="">
+              <img
+                src="https://theme.hstatic.net/200000881795/1001243022/14/facebook.png?v=152"
+                alt="Facebook"
+            /></a>
+            <a href="">
+              <img
+                src="https://theme.hstatic.net/200000881795/1001243022/14/instagram.png?v=152"
+                alt="Instagram"
+            /></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer__PaymentMethod">
+        <a href="#">
+          <img
+            src="https://theme.hstatic.net/200000881795/1001243022/14/footer_trustbadge.png?v=152"
+            alt="Phương thức thanh toán"
+          />
+        </a>
+      </div>
+    </footer>
+    <script src="../js/sanpham.js"></script>
+    <script src="../js/header.js"></script>
+  </body>
+</html>
