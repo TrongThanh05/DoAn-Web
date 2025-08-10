@@ -1,3 +1,58 @@
+const container = document.getElementById('ProductsGrid');
+
+function renderProducts(productArray) {
+  productArray.forEach((product) => {
+    const productHTML = `
+      <div class="main__productsList-item col-12 col-sm-6 col-md-4 col-lg-3" 
+           id="${product.id}" 
+           type="${product.type}">
+        <div class="product__img">
+          <a href="../chiTietSanPham/chiTietSanPham.html?type=${product.type}&id=${product.id}" class="product__imgLink">
+            <img class="img-fluid" src="${product.images[0]}" alt="${product.alt}" />
+          </a>
+          <button class="product__img-addCartBadge">
+            <i class="fas fa-shopping-cart"></i>
+          </button>
+        </div>
+        <div class="product__info">
+          <div class="product__info-top">
+            <h5>${product.brand}</h5>
+            <div class="product__info-loveIcon">
+              <i class="loveIcon__icon fa-regular fa-heart"></i>
+              <span class="loveIcon__text">Yêu thích</span>
+            </div>
+          </div>
+          <a href="../chiTietSanPham/chiTietSanPham.html?type=${product.type}&id=${product.id}" id="productName">${product.name}</a>
+          <p>${product.price}đ</p>
+        </div>
+        <a href="../chiTietSanPham/chiTietSanPham.html?type=${product.type}&id=${product.id}" class="product__buyNow">Mua ngay</a>
+      </div>
+    `;
+    container.insertAdjacentHTML('beforeend', productHTML);
+  });
+}
+
+// thêm vào trang
+// Lấy tên file từ URL (vd: ao.html → "ao")
+const pageName = window.location.pathname
+  .split('/')
+  .pop()
+  .split('.')[0]
+  .toLowerCase();
+
+console.log(pageName); // "ao", "quan", "giay"...
+if (pageName == 'sanpham') {
+  renderProducts(shirts);
+  renderProducts(pants);
+  renderProducts(shoes);
+} else if (pageName == 'ao') {
+  renderProducts(shirts);
+} else if (pageName == 'quan') {
+  renderProducts(pants);
+} else if (pageName == 'giay') {
+  renderProducts(shoes);
+}
+
 // Hàm để thêm sản phẩm vào mục sản phẩm yêu thích
 function addHeartBadge(productName, productPrice, productSrcImg, productLink) {
   // Lấy giỏ hàng từ localStorage hoặc khởi tạo giỏ hàng rỗng

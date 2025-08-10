@@ -90,7 +90,7 @@ const shirts = [
     price: 520000,
     oldPrice: 680000,
     images: [
-      '../img/ao/ao_sweater_polo.png',
+      '../img/ao/ao_sweater_polo.jpg',
       '../img/sweaterpolo2.jpg',
       '../img/sweaterpolo3.jpg',
     ],
