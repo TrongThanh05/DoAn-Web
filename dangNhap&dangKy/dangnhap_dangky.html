@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login & Register</title>
+    <link rel="stylesheet" href="../css/basic.css" />
+    <link rel="stylesheet" href="../css/dangnhap_dangky.css" />
+    <!-- reset css -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+    />
+    <!-- get icon with cdn -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="form-box">
+        <a class="backPage" href="../html/trangchu.html"
+          ><i class="fa-solid fa-arrow-left"></i>Quay lại</a
+        >
+        <div class="image-box">
+          <img
+            src="../img/login_regis.jpg"
+            alt="Hình ảnh bắt mắt"
+            class="form-image"
+          />
+        </div>
+        <div class="button-box">
+          <button type="button" class="toggle-btn" onclick="showLogin()">
+            Đăng nhập
+          </button>
+          <button type="button" class="toggle-btn" onclick="showRegister()">
+            Đăng ký
+          </button>
+        </div>
+        <div class="form-container">
+          <form id="loginForm" class="input-group" onsubmit="login(event)">
+            <input
+              type="text"
+              class="input-field"
+              placeholder="Tài khoản"
+              required
+            />
+            <input
+              type="password"
+              class="input-field"
+              placeholder="Mật khẩu"
+              required
+            />
+            <button type="submit" class="submit-btn">Đăng nhập</button>
+          </form>
+          <form
+            id="registerForm"
+            class="input-group"
+            onsubmit="register(event)"
+          >
+            <input
+              type="text"
+              class="input-field"
+              placeholder="Tài khoản"
+              required
+            />
+            <input
+              type="email"
+              class="input-field"
+              placeholder="Email"
+              required
+            />
+            <input type="text" class="input-field" placeholder="SĐT" required />
+            <input
+              type="password"
+              class="input-field"
+              placeholder="Mật khẩu"
+              required
+            />
+            <button type="submit" class="submit-btn">Đăng ký</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Noti -->
+    <div id="successModal" class="modal">
+      <div class="modal-content">
+        <div class="check-icon">✔</div>
+        <h2>Thành công!</h2>
+        <p id="modalMessage"></p>
+      </div>
+    </div>
+
+    <script>
+      const loginForm = document.getElementById('loginForm');
+      const registerForm = document.getElementById('registerForm');
+
+      function showLogin() {
+        loginForm.style.display = 'block';
+        registerForm.style.display = 'none';
+      }
+
+      function showRegister() {
+        loginForm.style.display = 'none';
+        registerForm.style.display = 'block';
+      }
+
+      function showModal(message, redirectUrl) {
+        const modal = document.getElementById('successModal');
+        const modalMessage = document.getElementById('modalMessage');
+        modalMessage.textContent = message;
+        modal.style.display = 'flex';
+
+        // Tự động đóng modal và điều hướng sau 1,5 giây
+        setTimeout(() => {
+          modal.style.display = 'none';
+          if (redirectUrl) {
+            window.location.href = redirectUrl;
+          }
+        }, 1500);
+      }
+
+      function login(event) {
+        event.preventDefault();
+        showModal('Đăng nhập thành công!', '../trangchu/trangchu.html');
+      }
+      function register(event) {
+        event.preventDefault();
+        showModal('Đăng ký thành công!', '../trangchu/trangchu.html');
+      }
+
+      showLogin();
+      // Lấy giá trị tham số 'type' từ URL
+      function getTypeFromUrl() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get('type'); // Trả về 'login' hoặc 'register'
+      }
+      // Hiển thị form dựa trên giá trị 'type'
+      function showFormBasedOnType() {
+        const type = getTypeFromUrl();
+        if (type === 'register') {
+          showRegister();
+        } else {
+          showLogin(); // Mặc định hiển thị form đăng nhập
+        }
+      }
+
+      // Khi trang được tải, thực thi logic
+      document.addEventListener('DOMContentLoaded', showFormBasedOnType);
+    </script>
+  </body>
+</html>

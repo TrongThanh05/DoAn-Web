@@ -1,0 +1,81 @@
+.main {
+  margin: 16px 160px;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 24px;
+}
+
+.main__contact {
+  display: flex;
+  /* 0 0 để nó không phóng to hoặc thu nhỏ nếu thiếu hoặc thừa chỗ và 38% là trừ ra gap: 24px = 2%;*/
+  flex: 0 0 38%;
+  flex-direction: column;
+  gap: 24px;
+}
+.main__contact h2 {
+  font-size: 2rem;
+  font-weight: 400;
+}
+.main__contact-address,
+.main__contact-phone,
+.main__contact-email {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.7);
+}
+.main__contact a:hover {
+  color: var(--footer-color);
+}
+.main__contact hr {
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+}
+.main__contact-input {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+}
+.main__contact-input h3 {
+  font-weight: 400;
+}
+.main__contact-input input {
+  width: 100%;
+  height: 48px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  padding-left: 12px;
+}
+.main__contact-input textarea {
+  height: 200px;
+  padding: 12px 0 0 12px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+}
+.main__contact-input .input__submit {
+  background: var(--text-color);
+  color: var(--white-color);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.main__contact-input .input__submit:hover {
+  transform: scale(0.985);
+}
+.main__img {
+  display: flex;
+  flex: 0 0 60%;
+  overflow: hidden;
+  height: auto; /* Giữ tỷ lệ gốc */
+}
+@media (max-width: 768px) {
+  .main {
+    flex-wrap: wrap; /* Cho phép xuống dòng khi màn hình nhỏ hơn 1000px */
+    margin: 16px 12px;
+  }
+  .main__contact,
+  .main__img {
+    max-width: 100%;
+    flex: 1 1 100%; /* Mỗi phần tử chiếm toàn bộ chiều ngang */
+  }
+}
