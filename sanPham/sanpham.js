@@ -1,5 +1,6 @@
+// Lấy khung chứa của các sản phẩm
 const container = document.getElementById('ProductsGrid');
-
+// function thêm sản phẩm vào khung theo array có sẵn trong file wareHouse.js được script vào ở html
 function renderProducts(productArray) {
   productArray.forEach((product) => {
     const productHTML = `
@@ -16,7 +17,7 @@ function renderProducts(productArray) {
         </div>
         <div class="product__info">
           <div class="product__info-top">
-            <h5>${product.brand}</h5>
+            <h5>4Bros</h5>
             <div class="product__info-loveIcon">
               <i class="loveIcon__icon fa-regular fa-heart"></i>
               <span class="loveIcon__text">Yêu thích</span>
@@ -32,6 +33,18 @@ function renderProducts(productArray) {
   });
 }
 
+// Tạo 1 array tổng hợp sản phẩm từ 3 array kia
+const productArray = new Array();
+const products = (shirts, pants, shoes) => {
+  // compare length
+  let productQuanity = Math.max(shirts.length, pants.length, shoes.length);
+
+  for (let i = 0; i < productQuanity; i++) {
+    productArray.push(shirts[i], pants[i], shoes[i]);
+  }
+};
+products(shirts, pants, shoes);
+
 // thêm vào trang
 // Lấy tên file từ URL (vd: ao.html → "ao")
 const pageName = window.location.pathname
@@ -40,11 +53,8 @@ const pageName = window.location.pathname
   .split('.')[0]
   .toLowerCase();
 
-console.log(pageName); // "ao", "quan", "giay"...
 if (pageName == 'sanpham') {
-  renderProducts(shirts);
-  renderProducts(pants);
-  renderProducts(shoes);
+  renderProducts(productArray);
 } else if (pageName == 'ao') {
   renderProducts(shirts);
 } else if (pageName == 'quan') {
