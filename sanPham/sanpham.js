@@ -1,14 +1,41 @@
 // Lấy khung chứa của các sản phẩm
 const container = document.getElementById('ProductsGrid');
-// function thêm sản phẩm vào khung theo array có sẵn trong file wareHouse.js được script vào ở html
-function renderProducts(productArray) {
+
+// Lấy tên file từ URL (vd: ao.html → "ao")
+const pageName = window.location.pathname
+  .split('/')
+  .pop()
+  .split('.')[0]
+  .toLowerCase();
+
+// Tạo 1 array tổng hợp sản phẩm từ 3 array kia khi ở trong trang sản phẩm
+const productArray = [];
+const products = (shirts, pants, shoes) => {
+  const maxLength = Math.max(shirts.length, pants.length, shoes.length);
+
+  for (let i = 0; i < maxLength; i++) {
+    if (i < shirts.length) {
+      productArray.push(shirts[i]);
+    }
+    if (i < pants.length) {
+      productArray.push(pants[i]);
+    }
+    if (i < shoes.length) {
+      productArray.push(shoes[i]);
+    }
+  }
+};
+products(shirts, pants, shoes);
+
+// function thêm sản phẩm vào khung theo array có sẵn trong file wareHouse.js
+function renderProducts(productArray, type) {
   productArray.forEach((product) => {
     const productHTML = `
       <div class="main__productsList-item col-12 col-sm-6 col-md-4 col-lg-3" 
            id="${product.id}" 
-           type="${product.type}">
+           type="${type}">
         <div class="product__img">
-          <a href="../chiTietSanPham/chiTietSanPham.html?type=${product.type}&id=${product.id}" class="product__imgLink">
+          <a href="../chiTietSanPham/chiTietSanPham.html?type=${type}&id=${product.id}" class="product__imgLink">
             <img class="img-fluid" src="${product.images[0]}" alt="${product.alt}" />
           </a>
           <button class="product__img-addCartBadge">
@@ -23,45 +50,118 @@ function renderProducts(productArray) {
               <span class="loveIcon__text">Yêu thích</span>
             </div>
           </div>
-          <a href="../chiTietSanPham/chiTietSanPham.html?type=${product.type}&id=${product.id}" id="productName">${product.name}</a>
+          <a href="../chiTietSanPham/chiTietSanPham.html?type=${type}&id=${product.id}" id="productName">${product.name}</a>
           <p>${product.price}đ</p>
         </div>
-        <a href="../chiTietSanPham/chiTietSanPham.html?type=${product.type}&id=${product.id}" class="product__buyNow">Mua ngay</a>
+        <a href="../chiTietSanPham/chiTietSanPham.html?type=${type}&id=${product.id}" class="product__buyNow">Mua ngay</a>
       </div>
     `;
     container.insertAdjacentHTML('beforeend', productHTML);
   });
 }
+// Xử lý chuyển trang trong 1 mục sản phẩm
+let pageNumberNow = 1;
+const itemsPerPage = 9;
 
-// Tạo 1 array tổng hợp sản phẩm từ 3 array kia
-const productArray = new Array();
-const products = (shirts, pants, shoes) => {
-  // compare length
-  let productQuanity = Math.max(shirts.length, pants.length, shoes.length);
+//Chuyển trang
+function switchPage(page) {
+  container.innerHTML = '';
+  const start = (page - 1) * itemsPerPage;
+  const end = start + itemsPerPage;
+  let productArrayPerPage = [];
 
-  for (let i = 0; i < productQuanity; i++) {
-    productArray.push(shirts[i], pants[i], shoes[i]);
+  // check trang hiện tại là gì
+  if (pageName == 'sanpham') {
+    productArrayPerPage = productArray.slice(start, end);
+  } else if (pageName == 'ao') {
+    productArrayPerPage = shirts.slice(start, end);
+  } else if (pageName == 'quan') {
+    productArrayPerPage = pants.slice(start, end);
+  } else if (pageName == 'giay') {
+    productArrayPerPage = shoes.slice(start, end);
   }
-};
-products(shirts, pants, shoes);
 
-// thêm vào trang
-// Lấy tên file từ URL (vd: ao.html → "ao")
-const pageName = window.location.pathname
-  .split('/')
-  .pop()
-  .split('.')[0]
-  .toLowerCase();
-
-if (pageName == 'sanpham') {
-  renderProducts(productArray);
-} else if (pageName == 'ao') {
-  renderProducts(shirts);
-} else if (pageName == 'quan') {
-  renderProducts(pants);
-} else if (pageName == 'giay') {
-  renderProducts(shoes);
+  renderProducts(productArrayPerPage);
 }
+
+// Tổng số trang và thêm số lượng button theo số lượng đó
+let pageNumberTotal = 0;
+function addButtonNumber(page) {
+  if (pageName == 'sanpham') {
+    pageNumberTotal = Math.ceil(productArray.length / itemsPerPage);
+  } else if (pageName == 'ao') {
+    pageNumberTotal = Math.ceil(shirts.length / itemsPerPage);
+  } else if (pageName == 'quan') {
+    pageNumberTotal = Math.ceil(pants.length / itemsPerPage);
+  } else if (pageName == 'giay') {
+    pageNumberTotal = Math.ceil(shoes.length / itemsPerPage);
+  }
+
+  if (pageNumberTotal < 1) pageNumberTotal = 1; // đảm bảo tối thiểu 1 trang
+
+  const buttonQuanity = document.getElementById('pageNumberTotal');
+  let pageNumberHtml = '';
+
+  console.log('pageNumberTotal =', pageNumberTotal);
+  for (let i = 1; i <= pageNumberTotal; i++) {
+    pageNumberHtml += `<button value="${i}" class="page-btn">${i}</button>`;
+  }
+
+  if (buttonQuanity) {
+    buttonQuanity.innerHTML = pageNumberHtml;
+  }
+  highlightActivePage(page);
+}
+//Css cho nút trang
+function highlightActivePage(pageNumber) {
+  // Xóa hết class active của tất cả các nút trước
+  document.querySelectorAll('.page-btn').forEach((btn) => {
+    btn.classList.remove('active');
+  });
+
+  // Thêm class active cho nút có value tương ứng pageNumber
+  const activeBtn = document.querySelector(`.page-btn[value="${pageNumber}"]`);
+  if (activeBtn) {
+    activeBtn.classList.add('active');
+  }
+}
+
+// Quy định số sản phẩm 1 trang khi load trang
+window.addEventListener('load', () => {
+  addButtonNumber(pageNumberNow);
+  switchPage(pageNumberNow);
+});
+
+// document.getElementById('pageNumber').addEventListener('click', () => {
+//   console.log(this.);
+// });
+const buttonQuanity = document.getElementById('pageNumberTotal');
+
+buttonQuanity.addEventListener('click', (e) => {
+  if (e.target.classList.contains('page-btn')) {
+    let page = parseInt(e.target.value);
+    pageNumberNow = page;
+    switchPage(pageNumberNow);
+    highlightActivePage(pageNumberNow);
+  }
+});
+
+document.getElementById('prev').addEventListener('click', () => {
+  if (pageNumberNow > 1) {
+    pageNumberNow--;
+    switchPage(pageNumberNow);
+    highlightActivePage(pageNumberNow);
+  }
+});
+
+document.getElementById('next').addEventListener('click', () => {
+  console.log(pageNumberTotal);
+  if (pageNumberNow < pageNumberTotal) {
+    pageNumberNow++;
+    switchPage(pageNumberNow);
+    highlightActivePage(pageNumberNow);
+  }
+});
 
 // Hàm để thêm sản phẩm vào mục sản phẩm yêu thích
 function addHeartBadge(productName, productPrice, productSrcImg, productLink) {
