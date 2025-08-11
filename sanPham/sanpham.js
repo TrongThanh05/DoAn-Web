@@ -35,8 +35,12 @@ function renderProducts(productArray, type) {
            id="${product.id}" 
            type="${type}">
         <div class="product__img">
-          <a href="../chiTietSanPham/chiTietSanPham.html?type=${type}&id=${product.id}" class="product__imgLink">
-            <img class="img-fluid" src="${product.images[0]}" alt="${product.alt}" />
+          <a href="../chiTietSanPham/chiTietSanPham.html?type=${type}&id=${
+      product.id
+    }" class="product__imgLink">
+            <img class="img-fluid" src="${product.images[0]}" alt="${
+      product.alt
+    }" />
           </a>
           <button class="product__img-addCartBadge">
             <i class="fas fa-shopping-cart"></i>
@@ -50,10 +54,14 @@ function renderProducts(productArray, type) {
               <span class="loveIcon__text">Yêu thích</span>
             </div>
           </div>
-          <a href="../chiTietSanPham/chiTietSanPham.html?type=${type}&id=${product.id}" id="productName">${product.name}</a>
-          <p>${product.price}đ</p>
+          <a href="../chiTietSanPham/chiTietSanPham.html?type=${type}&id=${
+      product.id
+    }" id="productName">${product.name}</a>
+          <p>${product.price.toLocaleString('vi-VN') + ' ₫'}</p>
         </div>
-        <a href="../chiTietSanPham/chiTietSanPham.html?type=${type}&id=${product.id}" class="product__buyNow">Mua ngay</a>
+        <a href="../chiTietSanPham/chiTietSanPham.html?type=${type}&id=${
+      product.id
+    }" class="product__buyNow">Mua ngay</a>
       </div>
     `;
     container.insertAdjacentHTML('beforeend', productHTML);
@@ -82,6 +90,7 @@ function switchPage(page) {
   }
 
   renderProducts(productArrayPerPage);
+  console.log(productArrayPerPage);
 }
 
 // Tổng số trang và thêm số lượng button theo số lượng đó
@@ -132,34 +141,102 @@ window.addEventListener('load', () => {
   switchPage(pageNumberNow);
 });
 
-// document.getElementById('pageNumber').addEventListener('click', () => {
-//   console.log(this.);
-// });
-const buttonQuanity = document.getElementById('pageNumberTotal');
+// Hàm trả về mảng chứa sản phẩm ở trang hiện tại
+function defineArrayOfPage(page) {
+  const start = (page - 1) * itemsPerPage;
+  const end = start + itemsPerPage;
+  let productArrayPerPage = [];
 
+  // check trang hiện tại và lấy mảng chứa sản phẩm ở trang hiện tại
+  if (pageName == 'sanpham') {
+    productArrayPerPage = productArray.slice(start, end);
+  } else if (pageName == 'ao') {
+    productArrayPerPage = shirts.slice(start, end);
+  } else if (pageName == 'quan') {
+    productArrayPerPage = pants.slice(start, end);
+  } else if (pageName == 'giay') {
+    productArrayPerPage = shoes.slice(start, end);
+  }
+
+  return productArrayPerPage;
+}
+
+// Khai báo biến để lưu filter hiện tại
+let currentFilter = 'all';
+// Function lọc dữ liệu selecter
+function applyFilterAndRender() {
+  // 1. Lấy sản phẩm mới của trang hiện tại
+  let arrayOfPage = defineArrayOfPage(pageNumberNow);
+
+  // 2. Lọc / sắp xếp dựa trên giá trị currentFilter
+  switch (currentFilter) {
+    case 'a-z':
+      arrayOfPage.sort((a, b) =>
+        a.name.localeCompare(b.name, 'vi', { sensitivity: 'base' })
+      );
+      break;
+    case 'z-a':
+      arrayOfPage.sort((a, b) =>
+        b.name.localeCompare(a.name, 'vi', { sensitivity: 'base' })
+      );
+      break;
+    case 'ascending':
+      arrayOfPage.sort((a, b) => a.price - b.price);
+      break;
+    case 'decreasing':
+      arrayOfPage.sort((a, b) => b.price - a.price);
+      break;
+    case 'all':
+    default:
+      break;
+  }
+
+  // 3. Xóa sản phẩm cũ trên giao diện
+  container.innerHTML = '';
+
+  // 4. Render sản phẩm mới
+  renderProducts(arrayOfPage);
+}
+
+// Nghe sự kiện change trên select
+document.getElementById('arrange').addEventListener('change', (e) => {
+  // Lấy value trực tiếp từ event target
+  currentFilter = e.target.value;
+
+  // Gọi lại hàm lọc và render
+  applyFilterAndRender();
+});
+
+// Xử lý sự kiện click ở các nút trang
+const buttonQuanity = document.getElementById('pageNumberTotal');
 buttonQuanity.addEventListener('click', (e) => {
   if (e.target.classList.contains('page-btn')) {
     let page = parseInt(e.target.value);
     pageNumberNow = page;
     switchPage(pageNumberNow);
     highlightActivePage(pageNumberNow);
+    applyFilterAndRender();
   }
 });
 
+// Xử lý sự kiện quay lại trang trước
 document.getElementById('prev').addEventListener('click', () => {
   if (pageNumberNow > 1) {
     pageNumberNow--;
     switchPage(pageNumberNow);
     highlightActivePage(pageNumberNow);
+    applyFilterAndRender();
   }
 });
 
+// Xử lý sự kiện tới trang tiếp theo
 document.getElementById('next').addEventListener('click', () => {
   console.log(pageNumberTotal);
   if (pageNumberNow < pageNumberTotal) {
     pageNumberNow++;
     switchPage(pageNumberNow);
     highlightActivePage(pageNumberNow);
+    applyFilterAndRender();
   }
 });
 

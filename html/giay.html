@@ -124,11 +124,11 @@
         <div class="arrangeProducts">
           <label for="arranger">Sắp xếp: </label>
           <select name="arranger" id="arrange">
-            <option id="options" value="all">Tất cả</option>
-            <option id="options" value="a-z">Tên từ A &rarr; Z</option>
-            <option id="options" value="z-a">Tên từ Z &rarr; A</option>
-            <option id="options" value="ascending">Giá tăng dần</option>
-            <option id="options" value="decreasing">Giá giảm dần</option>
+            <option value="all">Tất cả</option>
+            <option value="a-z">Tên từ A &rarr; Z</option>
+            <option value="z-a">Tên từ Z &rarr; A</option>
+            <option value="ascending">Giá tăng dần</option>
+            <option value="decreasing">Giá giảm dần</option>
           </select>
         </div>
       </div>
@@ -185,11 +185,11 @@
           <!--Automatically add products -->
           <div class="main__productsList-all row g-2" id="ProductsGrid"></div>
           <div class="main__productsList-pageChange">
-            <button class="main__productsList-pageChange--frontPage">
+            <button class="main__productsList-pageChange--frontPage" id="prev">
               <i class="fa-solid fa-angle-left"></i>
             </button>
-            <div class="pageChange__pages"></div>
-            <button class="main__productsList-pageChange--backPage">
+            <div class="pageChange__pages" id="pageNumberTotal"></div>
+            <button class="main__productsList-pageChange--backPage" id="next">
               <i class="fa-solid fa-angle-right"></i>
             </button>
           </div>
