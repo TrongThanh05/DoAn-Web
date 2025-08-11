@@ -32,8 +32,8 @@ function renderProducts(productArray, type) {
   productArray.forEach((product) => {
     const productHTML = `
       <div class="main__productsList-item col-12 col-sm-6 col-md-4 col-lg-3" 
-           id="${product.id}" 
-           type="${type}">
+           data-id="${product.id}" 
+           data-type="${type}">
         <div class="product__img">
           <a href="../chiTietSanPham/chiTietSanPham.html?type=${type}&id=${
       product.id
@@ -191,12 +191,66 @@ function applyFilterAndRender() {
       break;
   }
 
+  console.log('This array after solving option: ', arrayOfPage, currentFilter);
   // 3. Xóa sản phẩm cũ trên giao diện
   container.innerHTML = '';
-
   // 4. Render sản phẩm mới
   renderProducts(arrayOfPage);
 }
+//Xử lý lọc dữ liệu theo checkbox giá và kích thước sản phẩm
+// Hiển thị sản phẩm theo theo giá
+function filterByPriceAndBrand() {
+  const arrayOfPageOrigin = defineArrayOfPage(pageNumberNow);
+  let arrayOfPage = arrayOfPageOrigin;
+  // Lấy giá trị của các phần tử được check bằng map
+  const priceChecked = Array.from(
+    document.querySelectorAll('.price:checked')
+  ).map((cb) => cb.value);
+  const brandChecked = Array.from(
+    document.querySelectorAll('.brand:checked')
+  ).map((cb) => cb.value);
+
+  console.log(priceChecked, brandChecked);
+
+  if (priceChecked.length > 0) {
+    arrayOfPage = arrayOfPage.filter((item) => {
+      return priceChecked.some((priceRange) => {
+        const price = item.price;
+        if (priceRange === 'under100') return price < 100000;
+        if (priceRange === '100-200') return price >= 100000 && price <= 200000;
+        if (priceRange === '200-300') return price >= 200000 && price <= 300000;
+        if (priceRange === '300-500') return price >= 300000 && price <= 500000;
+        if (priceRange === 'over500') return price > 500000;
+      });
+    });
+  }
+  // Lọc theo danh mục
+  if (brandChecked.length) {
+    if (brandChecked.includes('Others')) {
+      //Không lọc bởi vì others ở đây là các brand khác: nike, adidas, balance
+      // Thì nó sẽ lấy hết tất cả sản phẩm mà được lọc qua price hoặc không lọc price
+    } else {
+      arrayOfPage = arrayOfPage.filter((p) => brandChecked.includes(p.brand));
+    }
+  }
+  console.log(arrayOfPage);
+
+  // 3. Xóa sản phẩm cũ trên giao diện
+  container.innerHTML = '';
+  renderProducts(arrayOfPage);
+}
+
+// Nghe sự kiện thay đổi checkbox
+document.addEventListener('change', (e) => {
+  if (e.target.classList.contains('price')) {
+    document.getElementById('arrange').value = 'all';
+    filterByPriceAndBrand();
+  }
+  if (e.target.classList.contains('brand')) {
+    document.getElementById('arrange').value = 'all';
+    filterByPriceAndBrand();
+  }
+});
 
 // Nghe sự kiện change trên select
 document.getElementById('arrange').addEventListener('change', (e) => {
@@ -216,6 +270,7 @@ buttonQuanity.addEventListener('click', (e) => {
     switchPage(pageNumberNow);
     highlightActivePage(pageNumberNow);
     applyFilterAndRender();
+    filterByPriceAndBrand();
   }
 });
 
@@ -226,6 +281,7 @@ document.getElementById('prev').addEventListener('click', () => {
     switchPage(pageNumberNow);
     highlightActivePage(pageNumberNow);
     applyFilterAndRender();
+    filterByPriceAndBrand();
   }
 });
 
@@ -237,6 +293,7 @@ document.getElementById('next').addEventListener('click', () => {
     switchPage(pageNumberNow);
     highlightActivePage(pageNumberNow);
     applyFilterAndRender();
+    filterByPriceAndBrand();
   }
 });
 
@@ -379,63 +436,3 @@ document
       addToCart(productName, productPrice, productImg);
     }
   });
-
-// Hiển thị sản phẩm theo theo giá
-function hiddenAllProduct(condition) {
-  document.querySelectorAll('.main__productsList-item').forEach((item) => {
-    const price = Number(item.dataset.price);
-    if (condition === 'under100') {
-      if (price < 100000) {
-        item.style.display = 'flex';
-      } else {
-        item.style.display = 'none';
-      }
-    } else {
-      if (condition === '100-200') {
-        if (price < 200000 && price >= 100000) {
-          item.style.display = 'flex';
-        } else {
-          item.style.display = 'none';
-        }
-      } else {
-        if (condition === '200-300') {
-          if (price < 300000 && price >= 200000) {
-            item.style.display = 'flex';
-          } else {
-            item.style.display = 'none';
-          }
-        } else {
-          if (condition === '300-500') {
-            if (price < 500000 && price >= 300000) {
-              item.style.display = 'flex';
-            } else {
-              item.style.display = 'none';
-            }
-          } else {
-            if (condition === 'over500') {
-              if (price >= 500000) {
-                item.style.display = 'flex';
-              } else {
-                item.style.display = 'none';
-              }
-            } else {
-              item.style.display = 'flex';
-            }
-          }
-        }
-      }
-    }
-  });
-}
-document.querySelectorAll('.price').forEach((box) => {
-  box.addEventListener('change', () => {
-    const isChecked = box.checked;
-    if (isChecked) {
-      hiddenAllProduct(box.value);
-    } else {
-      document.querySelectorAll('.main__productsList-item').forEach((item) => {
-        item.style.display = 'flex';
-      });
-    }
-  });
-});

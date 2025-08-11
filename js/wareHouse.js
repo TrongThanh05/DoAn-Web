@@ -387,7 +387,7 @@ const shoes = [
     colors: ['Xám', 'Xanh'],
     stock: 15,
     category: 'Giày sneaker',
-    brand: 'New Balance',
+    brand: 'Balance',
   },
   {
     id: 6,
