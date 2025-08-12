@@ -1,15 +1,16 @@
 const shirts = [
   {
     id: 1,
+    type: 'shirts',
     name: 'Áo Cardigan Len',
     price: 450000,
     oldPrice: 600000,
     images: [
-      '..img/ao/ao_cardigen/ao_cardigan_len.png',
-      '..img/ao/ao_cardigen/ao_cardigan_len1.png',
-      '..img/ao/ao_cardigen/ao_cardigan_len2.png',
-      '..img/ao/ao_cardigen/ao_cardigan_len3.png',
-      '..img/ao/ao_cardigen/ao_cardigan_len4.png',
+      '../img/ao/ao_cardigen/ao_cardigan_len.png',
+      '../img/ao/ao_cardigen/ao_cardigan_len1.png',
+      '../img/ao/ao_cardigen/ao_cardigan_len2.png',
+      '../img/ao/ao_cardigen/ao_cardigan_len3.png',
+      '../img/ao/ao_cardigen/ao_cardigan_len4.png',
     ],
     description: `Áo cardigan len phong cách vintage, chất liệu len mềm mại, giữ ấm tốt, phù hợp mùa thu đông.`,
     sizes: ['S', 'M', 'L', 'XL'],
@@ -20,15 +21,16 @@ const shirts = [
   },
   {
     id: 2,
+    type: 'shirts',
     name: 'Áo Hoodie Angel',
     price: 520000,
     oldPrice: 650000,
     images: [
-      '../img/ao/ao_hoodie_angelic/ao_hoodie_angelic.png',
-      '../img/ao/ao_hoodie_angelic/ao_hoodie_angelic1.png',
-      '../img/ao/ao_hoodie_angelic/ao_hoodie_angelic2.png',
-      '../img/ao/ao_hoodie_angelic/ao_hoodie_angelic3.png',
-      '../img/ao/ao_hoodie_angelic/ao_hoodie_angelic4.png',
+      '../img/ao/ao_hoddie_angleic/ao_hoodie_angelic.png',
+      '../img/ao/ao_hoddie_angleic/ao_hoodie_angelic1.png',
+      '../img/ao/ao_hoddie_angleic/ao_hoodie_angelic2.png',
+      '../img/ao/ao_hoddie_angleic/ao_hoodie_angelic3.png',
+      '../img/ao/ao_hoddie_angleic/ao_hoodie_angelic4.png',
     ],
     description: `Áo hoodie in hình Angel phong cách streetwear, chất liệu nỉ bông ấm áp, form rộng thoải mái.`,
     sizes: ['S', 'M', 'L', 'XL'],
@@ -39,6 +41,7 @@ const shirts = [
   },
   {
     id: 3,
+    type: 'shirts',
     name: 'Áo Phao Gile',
     price: 590000,
     oldPrice: 750000,
@@ -58,6 +61,7 @@ const shirts = [
   },
   {
     id: 4,
+    type: 'shirts',
     name: 'Áo Sơ Mi Kẻ Sọc',
     price: 350000,
     oldPrice: 450000,
@@ -77,6 +81,7 @@ const shirts = [
   },
   {
     id: 5,
+    type: 'shirts',
     name: 'Áo Sweater Nỉ',
     price: 480000,
     oldPrice: 600000,
@@ -94,6 +99,7 @@ const shirts = [
   },
   {
     id: 6,
+    type: 'shirts',
     name: 'Áo Sweater Polo',
     price: 520000,
     oldPrice: 680000,
@@ -113,6 +119,7 @@ const shirts = [
   },
   {
     id: 7,
+    type: 'shirts',
     name: 'Áo Thun Cộc Tay',
     price: 250000,
     oldPrice: 350000,
@@ -132,6 +139,7 @@ const shirts = [
   },
   {
     id: 8,
+    type: 'shirts',
     name: 'Áo Bomber Nam Local Brand',
     price: 650000,
     oldPrice: 850000,
@@ -152,6 +160,7 @@ const shirts = [
   },
   {
     id: 9,
+    type: 'shirts',
     name: 'Áo Manchester United mùa 2006-2007',
     price: 222000,
     oldPrice: 350000,
@@ -175,6 +184,7 @@ const shirts = [
 const pants = [
   {
     id: 1,
+    type: 'pants',
     name: 'Quần jeans dài Wash-Unisex',
     price: 550000,
     oldPrice: 690000,
@@ -194,6 +204,7 @@ const pants = [
   },
   {
     id: 2,
+    type: 'pants',
     name: 'Quần jeans nam rách gối khóa zip',
     price: 600000,
     oldPrice: 750000,
@@ -214,6 +225,7 @@ const pants = [
   },
   {
     id: 3,
+    type: 'pants',
     name: 'Quần jeans túi hộp ống suông unisex',
     price: 620000,
     oldPrice: 780000,
@@ -231,6 +243,7 @@ const pants = [
   },
   {
     id: 4,
+    type: 'pants',
     name: 'Quần ống suông nỉ kẻ sọc',
     price: 450000,
     oldPrice: 580000,
@@ -250,6 +263,7 @@ const pants = [
   },
   {
     id: 5,
+    type: 'pants',
     name: 'Quần ống rộng vải kaki T-Home-Wide-Leg',
     price: 580000,
     oldPrice: 720000,
@@ -269,6 +283,7 @@ const pants = [
   },
   {
     id: 6,
+    type: 'pants',
     name: 'Quần short jeans form rộng trên gối',
     price: 400000,
     oldPrice: 520000,
@@ -288,6 +303,7 @@ const pants = [
   },
   {
     id: 7,
+    type: 'pants',
     name: 'Quần short nỉ dây thun dài',
     price: 380000,
     oldPrice: 490000,
@@ -307,6 +323,7 @@ const pants = [
   },
   {
     id: 8,
+    type: 'pants',
     name: 'Quần âu ống suông vải trơn',
     price: 650000,
     oldPrice: 800000,
@@ -331,6 +348,7 @@ const pants = [
 const shoes = [
   {
     id: 1,
+    type: 'shoes',
     name: 'Giày Adidas SuperStar',
     price: 1800000,
     oldPrice: 2100000,
@@ -350,6 +368,7 @@ const shoes = [
   },
   {
     id: 2,
+    type: 'shoes',
     name: 'Giày Chelsea Boot nam da bò',
     price: 2200000,
     oldPrice: 2500000,
@@ -369,6 +388,7 @@ const shoes = [
   },
   {
     id: 3,
+    type: 'shoes',
     name: 'Giày Converse Chuck-Taylor-Chrismas',
     price: 1500000,
     oldPrice: 1700000,
@@ -388,6 +408,7 @@ const shoes = [
   },
   {
     id: 4,
+    type: 'shoes',
     name: 'Giày Jordan Four Military',
     price: 3500000,
     oldPrice: 3800000,
@@ -407,6 +428,7 @@ const shoes = [
   },
   {
     id: 5,
+    type: 'shoes',
     name: 'Giày New Balance',
     price: 1900000,
     oldPrice: 2200000,
@@ -426,6 +448,7 @@ const shoes = [
   },
   {
     id: 6,
+    type: 'shoes',
     name: 'Giày Samba OG 3 sọc',
     price: 1700000,
     oldPrice: 1900000,
@@ -445,6 +468,7 @@ const shoes = [
   },
   {
     id: 7,
+    type: 'shoes',
     name: 'Giày Sneaker Blazer Mid 77',
     price: 2000000,
     oldPrice: 2300000,
@@ -464,6 +488,7 @@ const shoes = [
   },
   {
     id: 8,
+    type: 'shoes',
     name: 'Giày Air Jordan',
     price: 3200000,
     oldPrice: 3500000,

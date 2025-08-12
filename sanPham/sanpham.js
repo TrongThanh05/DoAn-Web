@@ -28,16 +28,17 @@ const products = (shirts, pants, shoes) => {
 products(shirts, pants, shoes);
 
 // function thêm sản phẩm vào khung theo array có sẵn trong file wareHouse.js
-function renderProducts(productArray, type) {
+function renderProducts(productArray) {
   productArray.forEach((product) => {
     const productHTML = `
       <div class="main__productsList-item col-12 col-sm-6 col-md-4 col-lg-3" 
            data-id="${product.id}" 
-           data-type="${type}">
+           data-type="${product.type}"
+          data-price="${product.price}">
         <div class="product__img">
-          <a href="../chiTietSanPham/chiTietSanPham.html?type=${type}&id=${
-      product.id
-    }" class="product__imgLink">
+          <a href="../chiTietSanPham/chiTietSanPham.html?type=${
+            product.type
+          }&id=${product.id}" class="product__imgLink">
             <img class="img-fluid" src="${product.images[0]}" alt="${
       product.alt
     }" />
@@ -54,14 +55,14 @@ function renderProducts(productArray, type) {
               <span class="loveIcon__text">Yêu thích</span>
             </div>
           </div>
-          <a href="../chiTietSanPham/chiTietSanPham.html?type=${type}&id=${
-      product.id
-    }" id="productName">${product.name}</a>
+          <a href="../chiTietSanPham/chiTietSanPham.html?type=${
+            product.type
+          }&id=${product.id}" class="productName">${product.name}</a>
           <p>${product.price.toLocaleString('vi-VN') + ' ₫'}</p>
         </div>
-        <a href="../chiTietSanPham/chiTietSanPham.html?type=${type}&id=${
-      product.id
-    }" class="product__buyNow">Mua ngay</a>
+        <a href="../chiTietSanPham/chiTietSanPham.html?type=${
+          product.type
+        }&id=${product.id}" class="product__buyNow">Mua ngay</a>
       </div>
     `;
     container.insertAdjacentHTML('beforeend', productHTML);
@@ -331,60 +332,88 @@ function addHeartBadge(productName, productPrice, productSrcImg, productLink) {
   updateHeartBadge(heartProducts);
 }
 // Thêm sản phẩm yêu thích
-const loveItems = document.querySelectorAll('.product__info-loveIcon');
-const heartProducts = JSON.parse(localStorage.getItem('heartProducts')) || [];
-loveItems.forEach((item) => {
-  const loveIcon = item.querySelector('.loveIcon__icon');
-  const textIcon = item.querySelector('.loveIcon__text');
-  // Đổi trái tym và text khi click vào
-  loveIcon.addEventListener('click', () => {
-    let heartProducts = JSON.parse(localStorage.getItem('heartProducts')) || [];
-    if (loveIcon.classList.contains('fa-regular')) {
-      const productItem = loveIcon.closest('.main__productsList-item');
-      // Lấy tên, giá, ảnh, đường link của sản phẩm
-      const productName = productItem.querySelector('#productName')?.innerText;
-      const productPrice = parseInt(productItem.dataset.price);
-      const productLink = productItem
-        .querySelector('.product__imgLink')
-        .getAttribute('href');
-      const productSrcImg = productItem
-        .querySelector('img')
-        .getAttribute('src');
+document.addEventListener('DOMContentLoaded', () => {
+  const parent = document.querySelector('.main__productsList-all');
+  const observer = new MutationObserver(() => {
+    if (parent.childElementCount > 0) {
+      console.log('Đã render sản phẩm');
 
-      if (productName || productPrice || productSrcImg || productLink) {
-        addHeartBadge(productName, productPrice, productSrcImg, productLink);
-        // sửa trái tym và text khi thêm
-        loveIcon.classList.remove('fa-regular');
-        loveIcon.classList.add('fa-solid');
-        loveIcon.style.color = 'red';
-        textIcon.innerText = 'Bỏ Yêu thích'; // Thay đổi văn bản tương ứng
-      } else {
-        alert(`Không lấy được thông tin sản phẩm`);
-      }
+      // Xử lý sự kiện thêm sản phẩm yêu thích
+      const loveItems = document.querySelectorAll('.product__info-loveIcon');
+      console.log(loveItems); // Bây giờ sẽ có phần tử
+      const heartProducts =
+        JSON.parse(localStorage.getItem('heartProducts')) || [];
+      loveItems.forEach((item) => {
+        const loveIcon = item.querySelector('.loveIcon__icon');
+        const textIcon = item.querySelector('.loveIcon__text');
+        // Đổi trái tym và text khi click vào
+
+        loveIcon.addEventListener('click', () => {
+          let heartProducts =
+            JSON.parse(localStorage.getItem('heartProducts')) || [];
+          if (loveIcon.classList.contains('fa-regular')) {
+            const productItem = loveIcon.closest('.main__productsList-item');
+            // Lấy tên, giá, ảnh, đường link của sản phẩm
+            const productName =
+              productItem.querySelector('.productName')?.innerText;
+            const productPrice = parseInt(productItem.dataset.price);
+            const productLink = productItem
+              .querySelector('.product__imgLink')
+              .getAttribute('href');
+            const productSrcImg = productItem
+              .querySelector('img')
+              .getAttribute('src');
+
+            if (productName || productPrice || productSrcImg || productLink) {
+              addHeartBadge(
+                productName,
+                productPrice,
+                productSrcImg,
+                productLink
+              );
+              // sửa trái tym và text khi thêm
+              loveIcon.classList.remove('fa-regular');
+              loveIcon.classList.add('fa-solid');
+              loveIcon.style.color = 'red';
+              textIcon.innerText = 'Bỏ Yêu thích'; // Thay đổi văn bản tương ứng
+            } else {
+              alert(`Không lấy được thông tin sản phẩm`);
+            }
+          } else {
+            loveIcon.classList.remove('fa-solid');
+            loveIcon.classList.add('fa-regular');
+            loveIcon.style.color = '#333';
+            textIcon.innerText = 'Yêu thích'; // Thay đổi văn bản tương ứng
+
+            const productItem = loveIcon.closest('.main__productsList-item');
+            // Lấy tên, giá, ảnh, đường link của sản phẩm
+            const productName =
+              productItem.querySelector('.productName').innerText;
+
+            let index = heartProducts.findIndex(
+              (product) => product.name === productName
+            );
+            if (index !== -1) {
+              heartProducts.splice(index, 1);
+              // Lưu lại vào localStorage
+              localStorage.setItem(
+                'heartProducts',
+                JSON.stringify(heartProducts)
+              );
+              // Cập nhật badge hiển thị số lượng sản phẩm
+              updateHeartBadge(heartProducts);
+            } else {
+              alert(`Không tìm thấy sản phẩm yêu thích`);
+            }
+          }
+        });
+      });
+      observer.disconnect(); // Ngừng theo dõi
     } else {
-      loveIcon.classList.remove('fa-solid');
-      loveIcon.classList.add('fa-regular');
-      loveIcon.style.color = '#333';
-      textIcon.innerText = 'Yêu thích'; // Thay đổi văn bản tương ứng
-
-      const productItem = loveIcon.closest('.main__productsList-item');
-      // Lấy tên, giá, ảnh, đường link của sản phẩm
-      const productName = productItem.querySelector('#productName').innerText;
-
-      let index = heartProducts.findIndex(
-        (product) => product.name === productName
-      );
-      if (index !== -1) {
-        heartProducts.splice(index, 1);
-        // Lưu lại vào localStorage
-        localStorage.setItem('heartProducts', JSON.stringify(heartProducts));
-        // Cập nhật badge hiển thị số lượng sản phẩm
-        updateHeartBadge(heartProducts);
-      } else {
-        alert(`Không tìm thấy sản phẩm yêu thích`);
-      }
+      console.log('Chưa render sản phẩm');
     }
   });
+  observer.observe(parent, { childList: true });
 });
 
 // Hàm để thêm sản phẩm vào giỏ hàng
@@ -430,7 +459,7 @@ document
     const productItem = button.closest('.main__productsList-item');
     if (!productItem) return;
 
-    const productName = productItem.querySelector('#productName')?.innerText;
+    const productName = productItem.querySelector('.productName')?.innerText;
     const productPrice = parseInt(productItem.dataset.price);
     const productImg = productItem.querySelector('img').getAttribute('src');
     // Kiểm tra tên và giá có hợp lệ không và thêm sản phẩm vào giỏ hàng
