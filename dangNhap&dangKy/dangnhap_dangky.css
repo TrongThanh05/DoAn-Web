@@ -1,5 +1,5 @@
 body {
-  background-image: url('../img/background_login.jpg');
+  background-image: url('../img/backGround&vv/background_login.jpg');
   background-position: bottom;
   background-repeat: no-repeat;
   background-size: cover;
@@ -78,6 +78,7 @@ body {
   outline: none;
   background: transparent;
   font-size: 16px;
+  line-height: 24px;
 }
 
 .submit-btn {

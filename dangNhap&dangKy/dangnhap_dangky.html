@@ -3,9 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login & Register</title>
+    <title>Đăng nhập và đăng ký</title>
+    <link rel="stylesheet" href="../asset/bootstap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="../css/basic.css" />
-    <link rel="stylesheet" href="../css/dangnhap_dangky.css" />
+    <link rel="stylesheet" href="../dangNhap&dangKy/dangnhap_dangky.css" />
     <!-- reset css -->
     <link
       rel="stylesheet"
@@ -20,12 +21,12 @@
   <body>
     <div class="container">
       <div class="form-box">
-        <a class="backPage" href="../html/trangchu.html"
+        <a class="backPage" href="../tranhchu/trangchu.html"
           ><i class="fa-solid fa-arrow-left"></i>Quay lại</a
         >
         <div class="image-box">
           <img
-            src="../img/login_regis.jpg"
+            src="../img/backGround&vv/login_regis.jpg"
             alt="Hình ảnh bắt mắt"
             class="form-image"
           />
@@ -39,20 +40,24 @@
           </button>
         </div>
         <div class="form-container">
-          <form id="loginForm" class="input-group" onsubmit="login(event)">
+          <form id="loginForm" class="input-group">
             <input
               type="text"
               class="input-field"
+              id="loginAccount"
               placeholder="Tài khoản"
               required
             />
             <input
               type="password"
               class="input-field"
+              id="loginPassword"
               placeholder="Mật khẩu"
               required
             />
-            <button type="submit" class="submit-btn">Đăng nhập</button>
+            <button type="submit" class="submit-btn" id="submitLogin">
+              Đăng nhập
+            </button>
           </form>
           <form
             id="registerForm"
@@ -62,23 +67,34 @@
             <input
               type="text"
               class="input-field"
+              id="regisAccount"
               placeholder="Tài khoản"
               required
             />
             <input
               type="email"
               class="input-field"
+              id="regisEmail"
               placeholder="Email"
               required
             />
-            <input type="text" class="input-field" placeholder="SĐT" required />
+            <input
+              type="text"
+              class="input-field"
+              id="regisPhone"
+              placeholder="SĐT"
+              required
+            />
             <input
               type="password"
               class="input-field"
+              id="regisPassword"
               placeholder="Mật khẩu"
               required
             />
-            <button type="submit" class="submit-btn">Đăng ký</button>
+            <button type="submit" class="submit-btn" id="submitRegis">
+              Đăng ký
+            </button>
           </form>
         </div>
       </div>
@@ -92,63 +108,7 @@
         <p id="modalMessage"></p>
       </div>
     </div>
-
-    <script>
-      const loginForm = document.getElementById('loginForm');
-      const registerForm = document.getElementById('registerForm');
-
-      function showLogin() {
-        loginForm.style.display = 'block';
-        registerForm.style.display = 'none';
-      }
-
-      function showRegister() {
-        loginForm.style.display = 'none';
-        registerForm.style.display = 'block';
-      }
-
-      function showModal(message, redirectUrl) {
-        const modal = document.getElementById('successModal');
-        const modalMessage = document.getElementById('modalMessage');
-        modalMessage.textContent = message;
-        modal.style.display = 'flex';
-
-        // Tự động đóng modal và điều hướng sau 1,5 giây
-        setTimeout(() => {
-          modal.style.display = 'none';
-          if (redirectUrl) {
-            window.location.href = redirectUrl;
-          }
-        }, 1500);
-      }
-
-      function login(event) {
-        event.preventDefault();
-        showModal('Đăng nhập thành công!', '../trangchu/trangchu.html');
-      }
-      function register(event) {
-        event.preventDefault();
-        showModal('Đăng ký thành công!', '../trangchu/trangchu.html');
-      }
-
-      showLogin();
-      // Lấy giá trị tham số 'type' từ URL
-      function getTypeFromUrl() {
-        const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get('type'); // Trả về 'login' hoặc 'register'
-      }
-      // Hiển thị form dựa trên giá trị 'type'
-      function showFormBasedOnType() {
-        const type = getTypeFromUrl();
-        if (type === 'register') {
-          showRegister();
-        } else {
-          showLogin(); // Mặc định hiển thị form đăng nhập
-        }
-      }
-
-      // Khi trang được tải, thực thi logic
-      document.addEventListener('DOMContentLoaded', showFormBasedOnType);
-    </script>
+    <script src="../asset/bootstap/js/bootstrap.bundle.min.js"></script>
+    <script src="../dangNhap&dangKy/dangnhap_dangky.js"></script>
   </body>
 </html>
