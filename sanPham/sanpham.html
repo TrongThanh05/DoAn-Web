@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sản phẩm</title>
     <!-- link css -->
+    <link rel="stylesheet" href="../asset/bootstap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="../css/basic.css" />
     <link rel="stylesheet" href="../css/header.css" />
     <link rel="stylesheet" href="../css/footer.css" />
@@ -105,7 +106,7 @@
       </nav>
       <div class="header__under">
         <a href="../tranhchu/trangchu.html">Trang chủ</a>
-        / Áo
+        / Sản phẩm
       </div>
     </header>
     <div class="underHeader-img">
@@ -123,348 +124,87 @@
         <div class="arrangeProducts">
           <label for="arranger">Sắp xếp: </label>
           <select name="arranger" id="arrange">
-            <option id="options" value="all">Tất cả</option>
-            <option id="options" value="a-z">Tên từ A &rarr; Z</option>
-            <option id="options" value="z-a">Tên từ Z &rarr; A</option>
-            <option id="options" value="ascending">Giá tăng dần</option>
-            <option id="options" value="decreasing">Giá giảm dần</option>
+            <option value="all">Tất cả</option>
+            <option value="a-z">Tên từ A &rarr; Z</option>
+            <option value="z-a">Tên từ Z &rarr; A</option>
+            <option value="ascending">Giá tăng dần</option>
+            <option value="decreasing">Giá giảm dần</option>
           </select>
         </div>
       </div>
       <div class="main__products">
         <div class="main__productsSelect">
-          <div class="main__productsSelect--size">
-            <p>KÍCH THƯỚC</p>
-            <div>
-              <input type="checkbox" name="sizeS" id="size" value="sizeS" />
-              <label for="sizeS">Size S</label>
-            </div>
-            <div>
-              <input type="checkbox" name="sizeM" id="size" value="sizeM" />
-              <label for="sizeM">Size M</label>
-            </div>
-            <div>
-              <input type="checkbox" name="sizeL" id="size" value="sizeL" />
-              <label for="sizeL">Size L</label><br />
-            </div>
-            <div>
-              <input type="checkbox" name="sizeXL" id="size" value="sizeXL" />
-              <label for="sizeXL">Size XL</label><br />
+          <div class="main__productsSelect--brand">
+            <p>THƯƠNG HIỆU</p>
+            <div class="brandItem">
+              <div>
+                <input
+                  type="checkbox"
+                  name="Adidas"
+                  class="brand"
+                  value="Adidas"
+                />
+                <label for="Adidas">Adidas</label>
+              </div>
+              <div>
+                <input type="checkbox" name="Nike" class="brand" value="Nike" />
+                <label for="Nike">Nike</label>
+              </div>
+              <div>
+                <input
+                  type="checkbox"
+                  name="Balance"
+                  class="brand"
+                  value="Balance"
+                />
+                <label for="Balance">Balance</label><br />
+              </div>
+              <div>
+                <input
+                  type="checkbox"
+                  name="Others"
+                  class="brand"
+                  value="Others"
+                />
+                <label for="Others">Khác...</label><br />
+              </div>
             </div>
           </div>
           <div class="main__productsSelect--price">
             <p>MỨC GIÁ</p>
-            <div>
-              <input type="checkbox" value="under100" class="price" />
-              <label for="under100">Giá dưới 100.000đ</label><br />
-            </div>
-            <div>
-              <input type="checkbox" value="100-200" class="price" />
-              <label for="100-200">100.0000đ - 200.000đ</label><br />
-            </div>
-            <di>
-              <input type="checkbox" value="200-300" class="price" />
-              <label for="200-300">200.0000đ - 300.000đ</label><br />
-            </di>
-            <div>
-              <input type="checkbox" value="300-500" class="price" />
-              <label for="300-500">300.0000đ - 500.000đ</label><br />
-            </div>
-            <div>
-              <input type="checkbox" value="over500" class="price" />
-              <label for="over500">Giá trên 500.0000đ</label><br />
+            <div class="priceItem">
+              <div>
+                <input type="checkbox" value="under100" class="price" />
+                <label for="under100">Giá dưới 100.000đ</label><br />
+              </div>
+              <div>
+                <input type="checkbox" value="100-200" class="price" />
+                <label for="100-200">100.0000đ - 200.000đ</label><br />
+              </div>
+              <di>
+                <input type="checkbox" value="200-300" class="price" />
+                <label for="200-300">200.0000đ - 300.000đ</label><br />
+              </di>
+              <div>
+                <input type="checkbox" value="300-500" class="price" />
+                <label for="300-500">300.0000đ - 500.000đ</label><br />
+              </div>
+              <div>
+                <input type="checkbox" value="over500" class="price" />
+                <label for="over500">Giá trên 500.0000đ</label><br />
+              </div>
             </div>
           </div>
         </div>
-        <div class="main__productsList">
-          <div class="main__productsList-all">
-            <div class="main__productsList-item" id="8" type="shirts">
-              <div class="product__img">
-                <a
-                  href="../html/ao_bomber_mlb_ny.html"
-                  class="product__imgLink"
-                >
-                  <img
-                    src="../img/ao_bomber_mlb_ny/ao_bomber_mlb_grey.png"
-                    alt="Áo Bomber MLB NY"
-                  />
-                </a>
-                <button class="product__img-addCartBadge">
-                  <i class="fas fa-shopping-cart"></i>
-                </button>
-              </div>
-              <div class="product__info">
-                <div class="product__info-top">
-                  <h5>4Bros</h5>
-                  <div class="product__info-loveIcon">
-                    <i class="loveIcon__icon fa-regular fa-heart"></i>
-                    <span class="loveIcon__text">Yêu thích</span>
-                  </div>
-                </div>
-                <a
-                  href="../chiTietSanPham/chiTietSanPham.html?type=shirts&id=8"
-                  id="productName"
-                  >Áo Bomber MLB NY 2 lớp thu đông</a
-                >
-                <p>319,999đ</p>
-              </div>
-              <a
-                href="../chiTietSanPham/chiTietSanPham.html?type=shirts&id=8"
-                class="product__buyNow"
-                >Mua ngay</a
-              >
-            </div>
-            <div class="main__productsList-item" data-price="250000">
-              <div class="product__img">
-                <a
-                  href="../html/quan_au_nam_ong_suong.html"
-                  class="product__imgLink"
-                >
-                  <img
-                    src="../img/quan_au_nam_ong_suong/quan_au_black.png"
-                    alt="Quần Âu nam ống suông"
-                  />
-                </a>
-                <button class="product__img-addCartBadge">
-                  <i class="fas fa-shopping-cart"></i>
-                </button>
-              </div>
-              <div class="product__info">
-                <div class="product__info-top">
-                  <h5>4Bros</h5>
-                  <div class="product__info-loveIcon">
-                    <i class="loveIcon__icon fa-regular fa-heart"></i>
-                    <span class="loveIcon__text">Yêu thích</span>
-                  </div>
-                </div>
-                <a
-                  href="../chiTietSanPham/chiTietSanPham.html?type=pants&id=8"
-                  id="productName"
-                  >Quần âu nam ống suông</a
-                >
-                <p>250,000đ</p>
-              </div>
-              <a
-                href="../chiTietSanPham/chiTietSanPham.html?type=pants&id=8"
-                class="product__buyNow"
-                >Mua ngay</a
-              >
-            </div>
-            <div class="main__productsList-item" data-price="229999">
-              <div class="product__img">
-                <a href="../html/ao_mu_2006-07.html" class="product__imgLink">
-                  <img
-                    src="../img/ao_mu_2006-2007/ao_mu_2006-07.png"
-                    alt="Áo Mu 2006-2007"
-                  />
-                </a>
-                <button class="product__img-addCartBadge">
-                  <i class="fas fa-shopping-cart"></i>
-                </button>
-              </div>
-              <div class="product__info">
-                <div class="product__info-top">
-                  <h5>4Bros</h5>
-                  <div class="product__info-loveIcon">
-                    <i class="loveIcon__icon fa-regular fa-heart"></i>
-                    <span class="loveIcon__text">Yêu thích</span>
-                  </div>
-                </div>
-                <a
-                  href="../chiTietSanPham/chiTietSanPham.html?type=shirts&id=9"
-                  id="productName"
-                  >Áo đá bóng của CLB Manchester United mùa 2006 - 2007</a
-                >
-                <p>229,999đ</p>
-              </div>
-              <button
-                href="../chiTietSanPham/chiTietSanPham.html?type=shirts&id=9"
-                class="product__buyNow"
-              >
-                Mua ngay
-              </button>
-            </div>
-            <div class="main__productsList-item" data-price="750000">
-              <div class="product__img">
-                <a
-                  href="../html/giay_nike_air_jordan_1_retro_high_og.html"
-                  class="product__imgLink"
-                >
-                  <img
-                    src="../img/giay_air_jordan_1_Retro_High_OG/giay_air_jordan_red.png"
-                    alt="Giày Air Jordan 1 Retro High OG"
-                  />
-                </a>
-                <button class="product__img-addCartBadge">
-                  <i class="fas fa-shopping-cart"></i>
-                </button>
-              </div>
-              <div class="product__info">
-                <div class="product__info-top">
-                  <h5>4Bros</h5>
-                  <div class="product__info-loveIcon">
-                    <i class="loveIcon__icon fa-regular fa-heart"></i>
-                    <span class="loveIcon__text">Yêu thích</span>
-                  </div>
-                </div>
-                <a
-                  href="../chiTietSanPham/chiTietSanPham.html?type=shoes&id=8"
-                  id="productName"
-                  >Giày Air Jordan 1 Retro High OG</a
-                >
-                <p>750,000đ</p>
-              </div>
-              <a
-                href="../chiTietSanPham/chiTietSanPham.html?type=shoes&id=8"
-                class="product__buyNow"
-                >Mua ngay</a
-              >
-            </div>
-            <div class="main__productsList-item" data-price="649999">
-              <div class="product__img">
-                <a
-                  href="../html/giay_nike_air_jordan_1_retro_high_og.html"
-                  class="product__imgLink"
-                >
-                  <img
-                    src="../img/giay_chelsea_boot_nam_da_bo.png"
-                    alt="Giày Chelsea Boot nam"
-                  />
-                </a>
-                <button class="product__img-addCartBadge">
-                  <i class="fas fa-shopping-cart"></i>
-                </button>
-              </div>
-              <div class="product__info">
-                <div class="product__info-top">
-                  <h5>4Bros</h5>
-                  <div class="product__info-loveIcon">
-                    <i class="loveIcon__icon fa-regular fa-heart"></i>
-                    <span class="loveIcon__text">Yêu thích</span>
-                  </div>
-                </div>
-                <a
-                  href="../html/giay_nike_air_jordan_1_retro_high_og.html"
-                  id="productName"
-                  >Giày Chelsea Boot nam da bò</a
-                >
-                <p>649,999đ</p>
-              </div>
-              <a
-                href="../html/giay_nike_air_jordan_1_retro_high_og.html"
-                class="product__buyNow"
-                >Mua ngay</a
-              >
-            </div>
-            <div class="main__productsList-item" data-price="479999">
-              <div class="product__img">
-                <a
-                  href="../html/giay_nike_air_jordan_1_retro_high_og.html"
-                  class="product__imgLink"
-                >
-                  <img
-                    src="../img/giay_converse_Chuck_Taylor_Christmas.png"
-                    alt="Giày Converse cao cổ"
-                  />
-                </a>
-                <button class="product__img-addCartBadge">
-                  <i class="fas fa-shopping-cart"></i>
-                </button>
-              </div>
-              <div class="product__info">
-                <div class="product__info-top">
-                  <h5>4Bros</h5>
-                  <div class="product__info-loveIcon">
-                    <i class="loveIcon__icon fa-regular fa-heart"></i>
-                    <span class="loveIcon__text">Yêu thích</span>
-                  </div>
-                </div>
-                <a
-                  href="../html/giay_nike_air_jordan_1_retro_high_og.html"
-                  id="productName"
-                  >Giày converse Chuck Taylor Christmas cao cổ</a
-                >
-                <p>479,999đ</p>
-              </div>
-              <a
-                href="../html/giay_nike_air_jordan_1_retro_high_og.html"
-                class="product__buyNow"
-                >Mua ngay</a
-              >
-            </div>
-            <div class="main__productsList-item" data-price="309999">
-              <div class="product__img">
-                <a
-                  href="../html/quan_au_nam_ong_suong.html"
-                  class="product__imgLink"
-                >
-                  <img
-                    src="../img/quan_jean_nam_rach_va_goi.png"
-                    alt="Quần jean nam rách vá gối"
-                  />
-                </a>
-                <button class="product__img-addCartBadge">
-                  <i class="fas fa-shopping-cart"></i>
-                </button>
-              </div>
-              <div class="product__info">
-                <div class="product__info-top">
-                  <h5>4Bros</h5>
-                  <div class="product__info-loveIcon">
-                    <i class="loveIcon__icon fa-regular fa-heart"></i>
-                    <span class="loveIcon__text">Yêu thích</span>
-                  </div>
-                </div>
-                <a href="../html/quan_au_nam_ong_suong.html" id="productName"
-                  >Quần jean nam rách vá gối</a
-                >
-                <p>309,999đ</p>
-              </div>
-              <a
-                href="../html/quan_au_nam_ong_suong.html"
-                class="product__buyNow"
-                >Mua ngay</a
-              >
-            </div>
-            <div class="main__productsList-item" data-price="179000">
-              <div class="product__img">
-                <a
-                  href="../html/ao_bomber_mlb_ny.html"
-                  class="product__imgLink"
-                >
-                  <img src="../img/ao_so_mi_ke_soc.png" alt="Áo sơ mi kẻ sọc" />
-                </a>
-                <button class="product__img-addCartBadge">
-                  <i class="fas fa-shopping-cart"></i>
-                </button>
-              </div>
-              <div class="product__info">
-                <div class="product__info-top">
-                  <h5>4Bros</h5>
-                  <div class="product__info-loveIcon">
-                    <i class="loveIcon__icon fa-regular fa-heart"></i>
-                    <span class="loveIcon__text">Yêu thích</span>
-                  </div>
-                </div>
-                <a href="../html/ao_bomber_mlb_ny.html" id="productName"
-                  >Áo sơ mi kẻ sọc form rộng
-                </a>
-                <p>179,000đ</p>
-              </div>
-              <a href="../html/ao_bomber_mlb_ny.html" class="product__buyNow"
-                >Mua ngay</a
-              >
-            </div>
-          </div>
+        <div class="main__productsList container">
+          <!--Automatically add products -->
+          <div class="main__productsList-all row g-2" id="ProductsGrid"></div>
           <div class="main__productsList-pageChange">
-            <button class="main__productsList-pageChange--frontPage">
+            <button class="main__productsList-pageChange--frontPage" id="prev">
               <i class="fa-solid fa-angle-left"></i>
             </button>
-            <div class="pageChange__pages">
-              <button>1</button>
-              <button>2</button>
-            </div>
-            <button class="main__productsList-pageChange--backPage">
+            <div class="pageChange__pages" id="pageNumberTotal"></div>
+            <button class="main__productsList-pageChange--backPage" id="next">
               <i class="fa-solid fa-angle-right"></i>
             </button>
           </div>
@@ -529,6 +269,7 @@
     </footer>
 
     <!-- JavaScript -->
+    <script src="../js/wareHouse.js"></script>
     <script src="../js/header.js"></script>
     <script src="../sanPham/sanpham.js"></script>
     <script src="../asset/bootstap/js/bootstrap.bundle.min.js"></script>
