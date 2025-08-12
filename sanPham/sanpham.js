@@ -254,6 +254,8 @@ document.addEventListener('change', (e) => {
 
 // Nghe sự kiện change trên select
 document.getElementById('arrange').addEventListener('change', (e) => {
+  document.querySelectorAll('.brand').forEach((cb) => (cb.checked = false));
+  document.querySelectorAll('.price').forEach((cb) => (cb.checked = false));
   // Lấy value trực tiếp từ event target
   currentFilter = e.target.value;
 
