@@ -1,3 +1,38 @@
+// --- Kiểm tra trạng thái đăng nhập ---
+let accountLogin = JSON.parse(localStorage.getItem('accountLogin'));
+
+// Nếu chưa có accountLogin thì mới lấy từ query id
+if (!accountLogin) {
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get('id');
+
+  if (id) {
+    const accountList = JSON.parse(localStorage.getItem('accountList')) || [];
+    accountLogin = accountList.find((acc) => acc.AccountID == id) || null;
+
+    // Nếu tìm thấy thì lưu lại cho các trang sau
+    if (accountLogin) {
+      localStorage.setItem('accountLogin', JSON.stringify(accountLogin));
+    }
+  }
+}
+
+// --- Nếu đã đăng nhập thì hiển thị ở header ---
+if (accountLogin) {
+  const accountFunction = document.querySelector('.user-dropdown');
+  accountFunction.innerHTML = `
+        <p>${accountLogin.AccountName}</p>
+        <a class="text-light" onclick="logOut()">Đăng xuất</a>
+    `;
+}
+function logOut() {
+  localStorage.removeItem('accountLogin');
+  // hoặc localStorage.clear(); // xóa hết mọi dữ liệu (không khuyến khích nếu bạn lưu nhiều thứ khác)
+
+  // Chuyển hướng về trang đăng nhập
+  window.location.href = '../dangNhap&dangKy/dangnhap_dangky.html';
+}
+
 // thoát khỏi menu ở màn hình mobile
 const exitMenu = document.getElementById('exitMenu');
 const barIcon = document.getElementById('barIcon');
