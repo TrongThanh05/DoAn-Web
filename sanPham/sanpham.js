@@ -300,28 +300,36 @@ document.getElementById('next').addEventListener('click', () => {
   }
 });
 
+// Lấy object sản phẩm theo type và id
+function getDataByIdAndType(productType, productId) {
+  if (productType === 'shirts') {
+    return shirts.find((shirt) => shirt.id == productId);
+  }
+  if (productType === 'pants') {
+    return pants.find((pants) => pants.id == productId);
+  }
+  if (productType === 'shoes') {
+    return shoes.find((shoes) => shoes.id == productId);
+  }
+}
+
 // Hàm để thêm sản phẩm vào mục sản phẩm yêu thích
-function addHeartBadge(productName, productPrice, productSrcImg, productLink) {
+function addHeartBadge(favoriteProduct) {
   // Lấy giỏ hàng từ localStorage hoặc khởi tạo giỏ hàng rỗng
   const heartProducts = JSON.parse(localStorage.getItem('heartProducts')) || [];
 
   // Kiểm tra sản phẩm đã có trong giỏ chưa
   const existingProduct = heartProducts.find(
-    (item) => item.name === productName
+    (item) => item.id == favoriteProduct.id && item.type == favoriteProduct.type
   );
 
   if (existingProduct) {
     // Nếu đã có thì
-    alert(`${productName} đã nằm trong danh sách yêu thích💡`);
+    alert(`${favoriteProduct.name} đã nằm trong danh sách yêu thích💡`);
     return;
   } else {
     // Nếu chưa có, thêm sản phẩm mới
-    heartProducts.push({
-      name: productName,
-      price: productPrice,
-      img: productSrcImg,
-      link: productLink,
-    });
+    heartProducts.push(favoriteProduct);
   }
 
   // Lưu lại vào localStorage
@@ -351,26 +359,18 @@ document.addEventListener('DOMContentLoaded', () => {
         loveIcon.addEventListener('click', () => {
           let heartProducts =
             JSON.parse(localStorage.getItem('heartProducts')) || [];
+          const productItem = loveIcon.closest('.main__productsList-item');
+          // Lấy tên, giá, ảnh, đường link của sản phẩm
+          const productItemId = productItem.dataset.id;
+          const productItemType = productItem.dataset.type;
+          const favoriteProduct = getDataByIdAndType(
+            productItemType,
+            productItemId
+          );
+          console.log(favoriteProduct);
           if (loveIcon.classList.contains('fa-regular')) {
-            const productItem = loveIcon.closest('.main__productsList-item');
-            // Lấy tên, giá, ảnh, đường link của sản phẩm
-            const productName =
-              productItem.querySelector('.productName')?.innerText;
-            const productPrice = parseInt(productItem.dataset.price);
-            const productLink = productItem
-              .querySelector('.product__imgLink')
-              .getAttribute('href');
-            const productSrcImg = productItem
-              .querySelector('img')
-              .getAttribute('src');
-
-            if (productName || productPrice || productSrcImg || productLink) {
-              addHeartBadge(
-                productName,
-                productPrice,
-                productSrcImg,
-                productLink
-              );
+            if (favoriteProduct) {
+              addHeartBadge(favoriteProduct);
               // sửa trái tym và text khi thêm
               loveIcon.classList.remove('fa-regular');
               loveIcon.classList.add('fa-solid');
@@ -385,13 +385,9 @@ document.addEventListener('DOMContentLoaded', () => {
             loveIcon.style.color = '#333';
             textIcon.innerText = 'Yêu thích'; // Thay đổi văn bản tương ứng
 
-            const productItem = loveIcon.closest('.main__productsList-item');
-            // Lấy tên, giá, ảnh, đường link của sản phẩm
-            const productName =
-              productItem.querySelector('.productName').innerText;
-
             let index = heartProducts.findIndex(
-              (product) => product.name === productName
+              (product) =>
+                product.id == productItemId && product.type == productItemType
             );
             if (index !== -1) {
               heartProducts.splice(index, 1);
@@ -417,24 +413,21 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Hàm để thêm sản phẩm vào giỏ hàng
-function addToCart(productName, productPrice, productImg) {
+function addToCart(productInCart) {
   // Lấy giỏ hàng từ localStorage hoặc khởi tạo giỏ hàng rỗng
   let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
 
   // Kiểm tra sản phẩm đã có trong giỏ chưa
-  const existingProduct = cartItems.find((item) => item.name === productName);
+  const existingProduct = cartItems.find(
+    (item) => item.id == productInCart.id && item.type == productInCart.type
+  );
 
   if (existingProduct) {
     // Nếu đã có, tăng số lượng
     existingProduct.quantity += 1;
   } else {
     // Nếu chưa có, thêm sản phẩm mới
-    cartItems.push({
-      name: productName,
-      price: productPrice,
-      quantity: 1,
-      img: productImg,
-    });
+    cartItems.push(productInCart);
   }
   // Lưu lại vào localStorage
   localStorage.setItem('cartItems', JSON.stringify(cartItems));
@@ -444,7 +437,7 @@ function addToCart(productName, productPrice, productImg) {
   updateCartBadge(cartItems);
 
   // Hiển thị thông báo
-  alert(`🛒 ${productName} đã được thêm vào giỏ hàng ✅`);
+  alert(`🛒 ${productInCart.name} đã được thêm vào giỏ hàng ✅`);
 }
 
 // Lắng nghe sự kiện click trên danh sách sản phẩm
@@ -458,12 +451,11 @@ document
     // Lấy thông tin sản phẩm từ DOM
     const productItem = button.closest('.main__productsList-item');
     if (!productItem) return;
-
-    const productName = productItem.querySelector('.productName')?.innerText;
-    const productPrice = parseInt(productItem.dataset.price);
-    const productImg = productItem.querySelector('img').getAttribute('src');
+    const productItemId = productItem.dataset.id;
+    const productItemType = productItem.dataset.type;
+    const favoriteProduct = getDataByIdAndType(productItemType, productItemId);
     // Kiểm tra tên và giá có hợp lệ không và thêm sản phẩm vào giỏ hàng
-    if (productName && productPrice && productImg) {
-      addToCart(productName, productPrice, productImg);
+    if (favoriteProduct) {
+      addToCart(favoriteProduct);
     }
   });

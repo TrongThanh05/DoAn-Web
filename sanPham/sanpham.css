@@ -162,6 +162,7 @@
 .loveIcon__icon {
   cursor: pointer;
   font-size: 1.1rem;
+  transition: all 0.3s ease;
 }
 .loveIcon__text {
   position: absolute;

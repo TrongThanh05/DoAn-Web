@@ -1,22 +1,24 @@
 .main {
-  margin: 48px 160px 88px;
+  margin: 16px 160px;
+  display: flex;
+  flex-direction: column;
 }
 .main h2 {
   font-size: 2.5rem;
   font-weight: 400;
   margin-bottom: 48px;
+  color: var(--footer-color);
 }
 .main__productList {
   display: flex;
+  gap: 4.5%;
   flex-wrap: wrap;
-  gap: 25px;
 }
 .main__productsList-item {
-  width: 216px;
+  width: 25%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  gap: 5px;
   border-radius: 5px;
   padding-bottom: 10px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
@@ -31,12 +33,11 @@
   transition: all 0.3s ease;
 }
 .product__img img:hover {
-  border: 2px solid var(--logo-color);
   border-radius: 5px;
   transform: scale(0.95);
 }
 .product__img:hover .product__img-addCartBadge {
-  transform: translateY(-46px); /* Kéo lên trên */
+  transform: translateY(-44px); /* Kéo lên trên */
   opacity: 0.9; /* Tăng độ trong suốt (tùy chọn) */
 }
 .product__img-addCartBadge {
@@ -71,7 +72,7 @@
   margin: 0;
 }
 .product__info a {
-  height: 36px;
+  font-size: 100%;
   display: -webkit-box; /* Cho Webkit-based browsers */
   display: box; /* Thuộc tính chuẩn đề xuất */
 
@@ -108,6 +109,7 @@
 .loveIcon__icon {
   cursor: pointer;
   font-size: 1.1rem;
+  color: red;
 }
 .loveIcon__text {
   position: absolute;

@@ -21,7 +21,7 @@ if (!accountLogin) {
 if (accountLogin) {
   const accountFunction = document.querySelector('.user-dropdown');
   accountFunction.innerHTML = `
-        <p>${accountLogin.AccountName}</p>
+        <a class="text-light">${accountLogin.AccountName}</a>
         <a class="text-light" onclick="logOut()">Đăng xuất</a>
     `;
 }
@@ -49,10 +49,7 @@ exitMenu.addEventListener('click', () => {
 
 // Xử lý việc tính tổng số lượng sản phẩm và cập nhật badge hiển thị. Hàm này được gọi khi thêm sản phẩm hoặc khi tải trang.
 function updateCartBadge(cartItems) {
-  const totalQuantity = cartItems.reduce(
-    (total, item) => total + item.quantity,
-    0
-  );
+  const totalQuantity = cartItems.length;
   const cartBadge = document.getElementById('cart-badge');
   if (cartBadge) {
     cartBadge.innerText = totalQuantity;
