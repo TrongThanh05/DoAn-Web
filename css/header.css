@@ -343,4 +343,11 @@
   .header__icon {
     font-size: 1rem;
   }
+  .user-dropdown {
+    left: -65px;
+  }
+  .user-dropdown::before {
+    left: 70px;
+    transform: translateX(-50%); /*Vị trí tùy theo kích thước cha */
+  }
 }

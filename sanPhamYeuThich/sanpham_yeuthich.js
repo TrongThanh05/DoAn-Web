@@ -11,7 +11,7 @@ heartProducts.forEach((product) => {
   const formattedPrice =
     new Intl.NumberFormat('vi-VN').format(product.price) + 'đ';
   const item = document.createElement('div');
-  item.className = 'main__productsList-item col-12 col-sm-6 col-md-4 col-lg-3';
+  item.className = 'main__productsList-item';
   item.setAttribute('data-id', product.id);
   item.setAttribute('data-type', product.type);
   item.setAttribute('data-price', product.price);
